@@ -18,7 +18,6 @@ from django.urls import path, include
 from main import views
 from django.conf.urls.static import static
 from django.conf import settings
-# from category import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,6 +30,9 @@ urlpatterns = [
 
     # Category
     path('category/', include('category.urls')),
+
+    # Product
+    path('product/', include('product.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,7 +1,5 @@
 {% extends "main/base.html" %}
 
-{% load static %}
-
 {% block content %}
 
 <h2 class="font-weight-bold text-center">Categories</h2>
@@ -9,7 +7,7 @@
 {% for category in categories %}
 <div class="row justify-content-center my-3">
   <div class="col-md-10">
-    <a href="#">
+    <a href="{% url 'category:detail' category.id %}">
       <h2>{{ category.name }}</h2>
     </a>
     <h4>{{ category.description|striptags|truncatechars:100 }}</h4>

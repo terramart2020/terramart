@@ -6,16 +6,38 @@
 
 <div class="row justify-content-center my-3">
     <div class="col-5">
-      <img src="{% static 'main/terramart.png' %}" class="img-fluid">
+      <img src="{% static 'main/wellness_banner.jpg' %}" class="img-fluid">
+      <!-- <a href='https://www.freepik.com/photos/sea'>
+        Sea photo created by pvproductions - www.freepik.com
+      </a> -->
     </div>
   </div>
 
 <div class="row justify-content-center mb-3">
-    <div class="col-md-9 text-center">
-      <h1 id="hometext" class="font-weight-bold">Terramart was founded at Bayombong, Nueva Vizcaya, Philippines 3700 😊</h1>
-    </div>
+  <div class="col-md-9 text-center">
+    <!-- <h1 id="hometext" class="font-weight-bold">Terramart was founded at Bayombong, Nueva Vizcaya, Philippines 3700 😊</h1> -->
   </div>
+</div>
 
-<p>Search Categories</p>
+<h2 class="mt-5">Featured Products</h2>
+<hr>
+<div class="row">
+  {% for product in products %}
+  <div class="col-lg-4 col-md-6">
+
+    {% if product.image %}
+    <a href="{% url 'product:detail' product.id %}">
+      <img src="{{ product.image.url }}" class="img-fluid mb-2">
+    </a>
+    {% else %}
+
+    <img src="{{ product.image.url }}" class="img-fluid mb-2">
+    {% endif %}
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.description }}</p>
+
+  </div>
+  {% endfor %}
+</div>
 {% endblock %}
 
