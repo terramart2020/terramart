@@ -1,13 +1,15 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-
-<h2 class="font-weight-bold text-center">Products</h2>
+<div class="text-center">
+  <h2 class="font-weight-bold my-2">Products</h2>
+  <a class="btn btn-primary" href="{% url 'product:create_product' %}" role="button">Create</a>
+</div>
 
 {% for product in products %}
 <div class="row justify-content-center my-3">
   <div class="col-md-10">
-    <a href="{% url 'product:detail' product.id %}">
+    <a href="{% url 'product:view_product' product.id %}">
       <h2>{{ product.name }}</h2>
     </a>
     <h4>{{ product.description|striptags|truncatechars:100 }}</h4>

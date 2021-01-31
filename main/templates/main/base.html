@@ -25,30 +25,36 @@
     <title>Terramart</title>
   </head>
   <body>
-    <nav id="topNav" class="navbar navbar-expand-md navbar-light bg-light">
-        <div class="container">
+    <header>
+      <!-- Navbar -->
+      <nav id="topNav" class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="{% static 'main/terramart.png' %}" width="30" height="30" class="d-inline-block align-top" alt="Terramart's Logo">
+                <img src="{% static 'main/terramart.png' %}" width="30" class="d-inline-block align-top" alt="Terramart's Logo">
                 <span>Terramart</span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse text-center" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'category:all_categories' %}">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% url 'product:all_products' %}">Products</a>
-                  </li>
-                </ul>
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="{% url 'category:all_categories' %}">Categories</a>
+                </li> -->
+                <!-- <li class="nav-item">
+                  <a class="nav-link" href="{% url 'product:all_products' %}">Products</a>
+                </li> -->
+              </ul>
             </div>
         </div>
-    </nav>
+      </nav>
+      <!-- Navbar -->
+    </header>
+    
+    
     <div class="container">
         {% block content %}{% endblock %}
     </div>
@@ -59,7 +65,7 @@
               <div class="col-12 col-md">
                 
                 <img class="mb-2" src="{% static 'main/terramart.png' %}" alt="" width="24" height="19">
-                <small class="d-block mb-3 text-muted">&copy; 2020</small>
+                <small class="d-block mb-3 text-muted">&copy; Terramart 2020</small>
               </div>
               <!-- <div class="col-6 col-md">
                 <h5>Features</h5>

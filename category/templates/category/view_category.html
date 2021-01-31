@@ -1,0 +1,44 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <h2>View Category</h2>
+    </div>
+</div>
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" class="form-control" id="name" value="{{ category.name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" rows="3" class="form-control" id="description" >{{ category.description }}</textarea>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" name="active" class="form-check-input" id="active" {% if product.active %}checked{% endif %}>
+                <label class="form-check-label" for="active">Active</label>
+            </div>
+            <div class="form-group">
+                <a class="btn btn-dark" href="{% url 'category:all_categories' %}" role="button">Back</a>
+                <button type="submit" class="btn btn-primary mt-2">Save</button>
+            </div>
+            
+            <!-- <button type="button" class="btn btn-success" onclick="$('#complete').click()">Complete</button>
+            <button type="button" class="btn btn-danger" onclick="$('#delete').click()">Delete</button> -->
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -4,40 +4,203 @@
 
 {% block content %}
 
-<div class="row justify-content-center my-3">
-    <div class="col-5">
-      <img src="{% static 'main/wellness_banner.jpg' %}" class="img-fluid">
-      <!-- <a href='https://www.freepik.com/photos/sea'>
-        Sea photo created by pvproductions - www.freepik.com
-      </a> -->
+<!-- Background image -->
+<div
+class="p-5 text-center bg-image shadow"
+style="
+  background-image: url('/media/main/banner.jpg');
+  height: 500px;
+"
+>
+<!-- background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%285%29.jpg'); -->
+<!-- <a href='https://www.freepik.com/photos/background'>Background photo created by mindandi - www.freepik.com</a> -->
+  <div class="mask" style="background-color: rgba(0, 0, 0, 0.6)">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="text-white">
+        <h1 class="mb-3">Rediscover a great shopping tradition.</h1>
+        <h4 class="mb-3">Think. Buy. Grow. Succeed.</h4>
+        <a class="btn btn-outline-light" href="#!" role="button"
+          >Shop Now</a
+        >
+      </div>
     </div>
   </div>
-
-<div class="row justify-content-center mb-3">
-  <div class="col-md-9 text-center">
-    <!-- <h1 id="hometext" class="font-weight-bold">Terramart was founded at Bayombong, Nueva Vizcaya, Philippines 3700 😊</h1> -->
-  </div>
 </div>
+<!-- Background image -->
 
-<h2 class="mt-5">Featured Products</h2>
-<hr>
-<div class="row">
-  {% for product in products %}
-  <div class="col-lg-4 col-md-6">
+<main class="mt-5">
+  <div class="container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
 
-    {% if product.image %}
-    <a href="{% url 'product:detail' product.id %}">
-      <img src="{{ product.image.url }}" class="img-fluid mb-2">
-    </a>
-    {% else %}
+        <!-- Toggle button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
 
-    <img src="{{ product.image.url }}" class="img-fluid mb-2">
-    {% endif %}
-    <h3>{{ product.name }}</h3>
-    <p>{{ product.description }}</p>
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <strong class="text-dark mr-2">Categories:</strong>
+          <!-- Left links -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">All</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Wellness</a>
+            </li>
+            <li class="nav-item">
+              <!-- <a class="nav-link" href="#">Clothing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Food</a>
+            </li> -->
+          </ul>
+          <!-- Left links -->
 
+          <!-- Search form -->
+          <form class="d-flex input-group w-auto">
+            <input
+              type="search"
+              class="form-control"
+              placeholder="Search a product..."
+              aria-label="Search"
+            />
+            <button type="button" class="btn btn-primary" data-mdb-ripple-color="dark">
+              <i class="fas fa-search"></i>
+            </button>
+            <!-- <button
+              class="btn btn-outline-primary"
+              type="button"
+              data-mdb-ripple-color="dark"
+            >
+              Search
+            </button> -->
+          </form>
+        </div>
+        <!-- Collapsible wrapper -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+    
+
+    <!-- Products section -->
+    <section class="text-center mb-4">
+      <div class="row">
+
+        {% for product in products %}
+        <div class="col-lg-4 col-md-12 mb-4">
+          <div class="card h-200">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              {% if product.image %}
+              <a href="{% url 'product:view_product' product.id %}">
+                <img src="{{ product.image.url }}" class="img-fluid">
+              </a>
+              {% else %}
+              <img src="{{ product.image.url }}" class="img-fluid">
+              {% endif %}
+
+              <!-- <img
+                src="https://mdbootstrap.com/img/new/standard/nature/111.jpg"
+                class="img-fluid"
+              /> -->
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <h6>₱{{ product.selling_price }}</h6>
+              <p class="card-text">{{ product.description }}
+              </p>
+              <!-- <a href="#!" class="btn btn-primary">Buy Now</a> -->
+              <button
+              type="button"
+              class="btn btn-primary"
+              data-mdb-toggle="modal"
+              data-mdb-target="#staticBackdrop"
+              >
+              Buy Now
+              </button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <nav aria-label="...">
+          <ul class="pagination pagination-circle d-flex justify-content-center">
+            <li class="page-item">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="#">2 <span class="visually-hidden">(current)</span></a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Button trigger modal -->
+        <!-- <button
+        type="button"
+        class="btn btn-primary"
+        data-mdb-toggle="modal"
+        data-mdb-target="#staticBackdrop"
+        >
+        Launch static backdrop modal
+        </button> -->
+
+        <!-- Modal -->
+        <div
+        class="modal fade"
+        id="staticBackdrop"
+        data-mdb-backdrop="static"
+        data-mdb-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+        >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Seller details</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-mdb-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>Email Address: terramart2020@gmail.com</p>
+              <p>Contact No.: +63 916 573 8504</p>
+              <p>Please message QTY and PRODUCT NAME. Thank you!</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-mdb-dismiss="modal">
+                Close
+              </button>
+              <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
   </div>
-  {% endfor %}
-</div>
+</main>
 {% endblock %}
 

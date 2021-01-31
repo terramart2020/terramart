@@ -1,0 +1,56 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <h2>New Product</h2>
+    </div>
+</div>
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Category</label>
+                <select class="form-select" aria-label="Default select example" name="category" id="category" required>
+                    <option selected>Please select one</option>
+                    {% for category in categories %}
+                    <option value="{{category.id}}">
+                        {{category.name|capfirst}}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" rows="3" class="form-control" id="description" ></textarea>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" name="featured" class="form-check-input" id="featured">
+                <label class="form-check-label" for="featured">Featured</label>
+            </div>
+            <div class="form-group">
+                <label for="image">Image upload</label>
+                <input type="file" class="form-control-file" id="image" name="image">
+              </div>
+            <div class="form-group">
+                <a class="btn btn-dark" href="{% url 'product:all_products' %}" role="button">Back</a>
+                <button type="submit" class="btn btn-primary mt-2">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
