@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '@vx27ycz@e%-z-695^x2059=%7i5##ih^1i4o8=o6xcj=dwk06'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['terramart.pythonanywhere.com']
 
 
 # Application definition
