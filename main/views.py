@@ -10,3 +10,6 @@ def about(request):
 
 def contact(request):
     return render(request, 'main/contact.html')
+
+def privacy(request):
+    return render(request, 'main/privacy.html')
