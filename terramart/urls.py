@@ -28,8 +28,10 @@ urlpatterns = [
     path('terms', views.terms, name='terms'),
 
     # Auth
-    # path('signup/', views.signupuser, name='signupuser')
-
+    path('signup/', views.signupuser, name='signupuser'),
+    path('logout/', views.logoutuser, name='logoutuser'),
+    path('login/', views.loginuser, name='loginuser'),
+    
     # Category
     path('category/', include('category.urls')),
 

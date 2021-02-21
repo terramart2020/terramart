@@ -4,11 +4,14 @@ from .forms import ProductForm
 from category.models import Category
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.decorators import login_required
+
 
 def all_products(request):
     products = Product.objects.all()
     return render(request, 'product/all_products.html', {'products':products})
 
+@login_required
 def view_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     if request.method == 'GET':
@@ -23,7 +26,7 @@ def view_product(request, product_id):
         except ValueError:
             return render(request, 'product/view_product.html', {'product':product, 'form':form, 'error':'Bad input'})
 
-# @login_required
+@login_required
 def create_product(request):
     if request.method == 'GET':
         categories = Category.objects.all()

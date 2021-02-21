@@ -1,14 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category
 from .forms import CategoryForm
-
-def signupuser(request):
-    return render(request, '')
+from django.contrib.auth.decorators import login_required
 
 def all_categories(request):
     categories = Category.objects.all()
     return render(request, 'category/all_categories.html', {'categories':categories})
 
+@login_required
 def view_category(request, category_id):
     category = get_object_or_404(Category, pk=category_id)
     if request.method == 'GET':
@@ -22,7 +21,7 @@ def view_category(request, category_id):
         except ValueError:
             return render(request, 'category/view_category.html', {'category':category, 'form':form, 'error':'Bad input'})
 
-    # @login_required
+@login_required
 def create_category(request):
     if request.method == 'GET':
         return render(request, 'category/create_category.html', {'form':CategoryForm()})
@@ -36,8 +35,6 @@ def create_category(request):
         except ValueError:
             return render(request, 'category/create_category.html', {'form':CategoryForm(), 'error':'Bad data passed in. Please try again'})
     
-    
-
 # def detail(request, todo_pk):
 #     todo = get_object_or_404(Todo, pk=todo_pk, user=request.user)
 #     if request.method == 'GET':
