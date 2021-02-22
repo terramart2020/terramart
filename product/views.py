@@ -6,7 +6,7 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def all_products(request):
     products = Product.objects.all()
     return render(request, 'product/all_products.html', {'products':products})

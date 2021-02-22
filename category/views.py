@@ -3,6 +3,7 @@ from .models import Category
 from .forms import CategoryForm
 from django.contrib.auth.decorators import login_required
 
+@login_required
 def all_categories(request):
     categories = Category.objects.all()
     return render(request, 'category/all_categories.html', {'categories':categories})

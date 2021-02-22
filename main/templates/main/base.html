@@ -105,6 +105,7 @@
                 <img class="mb-2" src="{% static 'main/terramart.png' %}" alt="" width="24" height="19">
                 <small class="d-block mb-3 text-muted">&copy; 2020 Terramart Online Shop</small>
               </div>
+              {% if user.is_authenticated %}
               <!-- <div class="col-6 col-md">
                 <h5>Features</h5>
                 <ul class="list-unstyled text-small">
@@ -135,6 +136,7 @@
                   <li><a class="link-secondary" href="{% url 'terms' %}">Terms and Conditions</a></li>
                 </ul>
               </div>
+              {% endif %}
             </div>
           </footer>
     </div>

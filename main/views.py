@@ -6,7 +6,6 @@ from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
-
 def home(request):
     products = Product.objects.all()
     return render(request, 'main/home.html', {'products':products})
@@ -27,25 +26,6 @@ def privacy(request):
 def terms(request):
     return render(request, 'main/terms.html')
 
-def signupuser(request):
-    if request.method == 'GET':
-        return render(request, 'main/signupuser.html', {'form':UserCreationForm()})
-    else:
-        if request.POST['password1'] == request.POST['password2']:
-            try:
-                user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
-                user.save()
-                login(request, user)
-                return redirect('home')
-            except IntegrityError:
-                return render(request, 'main/signupuser.html', {'form':UserCreationForm(), 'error':'The username is already been taken. Please choose a new username.'})
-
-            
-        else:
-            # print('password did not match')
-            # Password didn't match
-            return render(request, 'main/signupuser.html', {'form':UserCreationForm(), 'error':'Passwords did not match'})
-
 def loginuser(request):
     if request.method == 'GET':
         return render(request, 'main/loginuser.html', {'form':AuthenticationForm()})
@@ -56,12 +36,32 @@ def loginuser(request):
         else:
             login(request, user)
             return redirect('home')
-            
+
+def signupuser(request):
+    if request.method == 'GET':
+        return render(request, 'main/signupuser.html', {'form':UserCreationForm()})
+    else:
+        if request.POST['password1'] == '' or request.POST['username'] == '':
+            return render(request, 'main/signupuser.html', {'form':UserCreationForm(), 'error':'Username and password are required.'})
+        else:
+            if request.POST['password1'] == request.POST['password2']:
+                try:
+                    user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
+                    user.save()
+                    login(request, user)
+                    return redirect('home')
+                except IntegrityError:
+                    return render(request, 'main/signupuser.html', {'form':UserCreationForm(), 'error':'The username is already been taken. Please choose a new username.'})
+            else:
+                return render(request, 'main/signupuser.html', {'form':UserCreationForm(), 'error':'Passwords did not match'})
+
 @login_required    
 def logoutuser(request):
     if request.method == 'POST':
         logout(request)
         return redirect('home')
+    else:
+        pass
 
 
 
